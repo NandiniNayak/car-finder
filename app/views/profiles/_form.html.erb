@@ -9,6 +9,8 @@
     <%= f.input :user_name %>
     <%= f.input :phone_number %>
     <%= f.input :address %>
+    <%# pass the user type as a hidden field %>
+     <%= f.hidden_field :user_type, value: @user_type %>
   </div>
 
   <div class="form-actions">

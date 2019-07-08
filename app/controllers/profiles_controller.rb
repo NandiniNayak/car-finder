@@ -15,6 +15,11 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
+   puts "------ profile new------"
+   puts params
+    # capture the user_type passed in the route
+    # @user_type = params[:user_type]
+     @user_type = params[:user_type] 
   end
 
   # GET /profiles/1/edit
@@ -25,6 +30,8 @@ class ProfilesController < ApplicationController
   # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
+    puts "------profile create--"
+    puts params[:profile][:user_type]
     # puts "--------- create method-------"
     # puts profile_params
     
@@ -33,9 +40,20 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        # after creating a profile user must be automatically redirect to listing a new car
-        format.html { redirect_to new_car_path, notice: 'Profile was successfully created.' }
-        format.json { render :show, status: :created, location: @profile }
+        # if the user is buyer redirect to the root_path else redirect to listing a car's page
+        if params[:profile][:user_type] == "buyer"
+          # update the buyers table with the profile_id 
+          @buyer = Buyer.new
+          @buyer.profile_id = current_user.profile.id
+          @buyer.save
+          # after creating a profile user must be automatically redirect to listing a new car
+          format.html { redirect_to root_path, notice: 'Profile was successfully created.' }
+          format.json { render :show, status: :created, location: @profile }
+        else
+          # after creating a profile user must be automatically redirect to listing a new car
+          format.html { redirect_to new_car_path, notice: 'Profile was successfully created.' }
+          format.json { render :show, status: :created, location: @profile }
+        end
       else
         format.html { render :new }
         format.json { render json: @profile.errors, status: :unprocessable_entity }

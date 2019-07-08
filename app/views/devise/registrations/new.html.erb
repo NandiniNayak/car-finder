@@ -15,6 +15,8 @@
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
+    <%# pass the user_type as a hidden field %>
+    <%= f.hidden_field :user_type, value: @user_type %>
   </div>
 
   <div class="form-actions">

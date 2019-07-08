@@ -1,64 +1,71 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Picture:</strong>
-  <%= image_tag @car.pictures.first %>
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <%# container for images %>
+    <% @car.pictures.each do |picture|%>
+      <%= image_tag picture, class: "d-block w-100"%>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <%# container for car content %>
+    <p>
+      <strong>Make:</strong>
+      <%= @car.make %>
+    </p>
+    <p>
+      <strong>Model:</strong>
+      <%= @car.model %>
+    </p>
 
-<p>
-  <strong>Make:</strong>
-  <%= @car.make %>
-</p>
+    <p>
+      <strong>Year:</strong>
+      <%= @car.year %>
+    </p>
 
-<p>
-  <strong>Model:</strong>
-  <%= @car.model %>
-</p>
+    <p>
+      <strong>Km:</strong>
+      <%= @car.km %>
+    </p>
 
-<p>
-  <strong>Year:</strong>
-  <%= @car.year %>
-</p>
+    <p>
+      <strong>Price:</strong>
+      <%= @car.price %>
+    </p>
 
-<p>
-  <strong>Km:</strong>
-  <%= @car.km %>
-</p>
+    <p>
+      <strong>Color:</strong>
+      <%= @car.color %>
+    </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @car.price %>
-</p>
+    <p>
+      <strong>Registration:</strong>
+      <%= @car.registration %>
+    </p>
 
-<p>
-  <strong>Color:</strong>
-  <%= @car.color %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @car.description %>
+    </p>
 
-<p>
-  <strong>Registration:</strong>
-  <%= @car.registration %>
-</p>
+    <p>
+      <strong>Fuel type:</strong>
+      <%= @car.fuel_type %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @car.description %>
-</p>
+    <p>
+      <strong>Transmission type:</strong>
+      <%= @car.transmission_type %>
+    </p>
 
-<p>
-  <strong>Fuel type:</strong>
-  <%= @car.fuel_type %>
-</p>
+    <p>
+      <strong>Location:</strong>
+      <%= @car.location %>
+    </p>
+    
+  </div>
+</div>
 
-<p>
-  <strong>Transmission type:</strong>
-  <%= @car.transmission_type %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @car.location %>
-</p>
 
 <%= link_to 'Edit', edit_car_path(@car) %> |
 <%= link_to 'Back', cars_path %>
