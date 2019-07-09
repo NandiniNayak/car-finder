@@ -60,6 +60,10 @@ class CarsController < ApplicationController
   # PATCH/PUT /cars/1
   # PATCH/PUT /cars/1.json
   def update
+    # delete the pictures before adding the new ones
+    if @car.pictures
+      @car.pictures.purge
+    end
     respond_to do |format|
       if @car.update(car_params)
         format.html { redirect_to @car, notice: 'Car was successfully updated.' }

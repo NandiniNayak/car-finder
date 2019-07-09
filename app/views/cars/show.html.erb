@@ -3,9 +3,13 @@
 <div class="row">
   <div class="col-md-8">
     <%# container for images %>
-    <% @car.pictures.each do |picture|%>
-      <%= image_tag picture, class: "d-block w-100"%>
-    <% end %>
+    <div class="row">
+      <% @car.pictures.each do |picture|%>
+        <div class="col-md-6">
+          <%= image_tag picture, class: "d-block w-100"%>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="col-md-4">
     <%# container for car content %>
