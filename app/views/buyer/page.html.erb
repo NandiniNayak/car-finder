@@ -1,0 +1,18 @@
+<form action="/payment" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
+    data-amount="<%= @car.price * 100 %>"
+    data-name="Stripe.com"
+    data-description="Widget"
+    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-locale="auto"
+    data-zip-code="true"
+    data-currency="AUD"
+    data-email="<%= current_user.email %>"
+    >
+  </script>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <%= hidden_field_tag :car_id,  @car.id%>
+  <%= hidden_field_tag :seller_id, @car.seller_id%>
+</form>
