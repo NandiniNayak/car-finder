@@ -10,7 +10,7 @@
         <%= link_to 'Sell My Car', new_car_path, class: "nav- btn btn-primary" %>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Listings</a>
+        <%= link_to 'Register To Buy', new_user_registration_path(user_type: "buyer"), class: "nav-link"%>
       </li>
       <% if user_signed_in? %>
         <li class="nav-item">
@@ -18,7 +18,7 @@
         </li>
       <% else %>
         <li class="nav-item">
-          <%= link_to "LogIn", new_user_session_path, class: "nav-link"%>
+          <%= link_to "LogIn", new_user_session_path(user_type: "returning_user"), class: "nav-link"%>
         </li>
       <% end %>
     </ul>

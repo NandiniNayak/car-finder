@@ -6,9 +6,11 @@
 </div>
 <div class="row mt-5">
     <% @cars.each do |car|%>
-    <div class="col-md-3">
+    <div class="col-md-4 mt-5">
         <div class="card" >
-            <%= image_tag car.pictures.first, class: "card-img-top"%>
+           <% if car.pictures.first %>
+             <%= image_tag car.pictures.first, class: "card-img-top" %>
+            <% end %>
             <div class="card-body">
                 <p class="card-text">
                 <%= car.model%> <%= car.make%>
@@ -16,6 +18,7 @@
                 <p>
                 $<%= car.price%>
                 </p>
+                <%= link_to 'Explore', car_path(car.id), class: "btn btn-primary"%>
             </div>
         </div>
     </div>

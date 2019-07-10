@@ -10,7 +10,8 @@
     <%= f.input :km %>
     <%= f.input :price %>
     <%= f.input :color, collection: ["red","blue","grey","black","white","yellow","silver", "other"] %>
-    <%= f.input :registration, start_year: Date.today.year - 1, end_year: Date.today.year + 1, label: "Registration expiry date"  %>
+    <%= "Registration expiry date" %>
+    <%= f.date_field :registration%>
     <%= f.input :description %>
     <%= f.input :fuel_type , collection: ["Petrol", "Diesel", "Hybrid"]%>
     <%= f.input :transmission_type, collection: ["Automatic", "Manual"] %>
