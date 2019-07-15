@@ -1,48 +1,69 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @profile.first_name %>
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <p>
+      <strong>First name:</strong>
+      <%= @profile.first_name %>
+    </p>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @profile.last_name %>
-</p>
+    <p>
+      <strong>Last name:</strong>
+      <%= @profile.last_name %>
+    </p>
 
-<p>
-  <strong>User name:</strong>
-  <%= @profile.user_name %>
-</p>
+    <p>
+      <strong>User name:</strong>
+      <%= @profile.user_name %>
+    </p>
 
-<p>
-  <strong>Phone number:</strong>
-  <%= @profile.phone_number %>
-</p>
+    <p>
+      <strong>Phone number:</strong>
+      <%= @profile.phone_number %>
+    </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @profile.address %>
-</p>
+    <p>
+      <strong>Address:</strong>
+      <%= @profile.address %>
+    </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @profile.user.email %>
-</p>
+    <p>
+      <strong>User:</strong>
+      <%= @profile.user.email %>
+    </p>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+    <%= link_to 'Edit', edit_profile_path(@profile) %> |
+    <%= link_to 'Back', profiles_path %>
 
-<%# Review form %>
-<%= form_for([@profile.seller, Review.new], remote: true) do |f|%>
-    <%= f.text_field :comment %>
-    <%= f.submit %>
-<% end %>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+       <div class="card-body">
+           <h5 class="card-title">Leave a Review</h5>
+          <p class="card-body">
+              <%# Review form %>
+            <%= form_for([@profile.seller, Review.new], remote: true) do |f|%>
+              <%= f.text_field :comment %>
+              <%= f.submit "Add Review", class: "btn btn-warning mt-3"  %>
+            <% end %>
+          </p>
+  </div>
+</div>
+
+  
+  </div>
+
+</div>
 
 <%# and list all the review for this seller %>
-
-<% @profile.seller.reviews.each do |review| %>
-  <br>
-   <%= review.comment%>
-  <h6> posted by  <%= review.buyer.profile.first_name%> </h6>
-<% end %>
+<div class="card">
+  <% @profile.seller.reviews.each do |review| %>
+  <div class="card-body">
+    <blockquote class="blockquote">
+      <p class="mb-0"><%= review.comment%></p>
+      <footer class="blockquote-footer">Posted By <cite title="Source Title"><%= review.buyer.profile.first_name%></cite></footer>
+    </blockquote>
+  </div>
+  <% end %>
+</div>
