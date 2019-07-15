@@ -74,9 +74,16 @@
 <% if(current_user && current_user.profile && (current_user.profile.id == @car.seller.profile_id)) %>
   <%= link_to 'Edit', edit_car_path(@car) %> |
 <% else %>
-  <%# show the buy option %>
-  <% if current_user && current_user.profile %>
-    <%= link_to 'buy', buyer_page_path(car_id: @car.id, seller_id: @car.seller_id), class: "btn btn-primary"%>
+  <%# if the car has a buyer then provide a sold button else show a buy button %>
+  <% if @car.buyer %>
+    <button class= "btn btn-danger"> Sold </button>
+    <%# Add a review button, to redirect to the profile of the seller %>
+    <%= link_to 'Review the seller', profile_path(@car.seller.profile_id), class: "btn btn-warning"%>
+  <% else %>
+    <%# show the buy option %>
+    <% if current_user && current_user.profile %>
+      <%= link_to 'buy', buyer_page_path(car_id: @car.id, seller_id: @car.seller_id), class: "btn btn-primary"%>
+    <% end %>
   <% end %>
 <% end %>
 

@@ -32,3 +32,17 @@
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>
+
+<%# Review form %>
+<%= form_for([@profile.seller, Review.new], remote: true) do |f|%>
+    <%= f.text_field :comment %>
+    <%= f.submit %>
+<% end %>
+
+<%# and list all the review for this seller %>
+
+<% @profile.seller.reviews.each do |review| %>
+  <br>
+   <%= review.comment%>
+  <h6> posted by  <%= review.buyer.profile.first_name%> </h6>
+<% end %>

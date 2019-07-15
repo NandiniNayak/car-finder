@@ -28,7 +28,9 @@ class BuyerController < ApplicationController
     # populate buyers_sellers table
     @seller = Seller.find(params[:seller_id])
     @buyer.sellers <<  @seller
-
-      redirect_to root_path, notice: "payment made successfully"
+  
+    # redirect back to the car show page
+    # car_path(@car.id)
+      redirect_to @car, notice: "payment made successfully"
   end
 end
