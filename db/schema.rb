@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_015343) do
+ActiveRecord::Schema.define(version: 2019_07_15_004401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2019_07_08_015343) do
     t.index ["profile_id"], name: "index_buyers_on_profile_id"
   end
 
+  create_table "buyers_sellers", force: :cascade do |t|
+    t.bigint "buyer_id"
+    t.bigint "seller_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_buyers_sellers_on_buyer_id"
+    t.index ["seller_id"], name: "index_buyers_sellers_on_seller_id"
+  end
+
   create_table "cars", force: :cascade do |t|
     t.string "make"
     t.string "model"
@@ -58,7 +67,19 @@ ActiveRecord::Schema.define(version: 2019_07_08_015343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "seller_id"
+    t.bigint "buyer_id"
+    t.index ["buyer_id"], name: "index_cars_on_buyer_id"
     t.index ["seller_id"], name: "index_cars_on_seller_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.bigint "seller_id"
+    t.bigint "buyer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_comments_on_buyer_id"
+    t.index ["seller_id"], name: "index_comments_on_seller_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -71,6 +92,16 @@ ActiveRecord::Schema.define(version: 2019_07_08_015343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "comment"
+    t.bigint "seller_id"
+    t.bigint "buyer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_reviews_on_buyer_id"
+    t.index ["seller_id"], name: "index_reviews_on_seller_id"
   end
 
   create_table "sellers", force: :cascade do |t|
@@ -94,7 +125,14 @@ ActiveRecord::Schema.define(version: 2019_07_08_015343) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "buyers", "profiles"
+  add_foreign_key "buyers_sellers", "buyers"
+  add_foreign_key "buyers_sellers", "sellers"
+  add_foreign_key "cars", "buyers"
   add_foreign_key "cars", "sellers"
+  add_foreign_key "comments", "buyers"
+  add_foreign_key "comments", "sellers"
   add_foreign_key "profiles", "users"
+  add_foreign_key "reviews", "buyers"
+  add_foreign_key "reviews", "sellers"
   add_foreign_key "sellers", "profiles"
 end
