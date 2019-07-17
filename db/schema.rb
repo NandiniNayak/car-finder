@@ -67,19 +67,7 @@ ActiveRecord::Schema.define(version: 2019_07_15_004401) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "seller_id"
-    t.bigint "buyer_id"
-    t.index ["buyer_id"], name: "index_cars_on_buyer_id"
     t.index ["seller_id"], name: "index_cars_on_seller_id"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.text "body"
-    t.bigint "seller_id"
-    t.bigint "buyer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["buyer_id"], name: "index_comments_on_buyer_id"
-    t.index ["seller_id"], name: "index_comments_on_seller_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -127,10 +115,7 @@ ActiveRecord::Schema.define(version: 2019_07_15_004401) do
   add_foreign_key "buyers", "profiles"
   add_foreign_key "buyers_sellers", "buyers"
   add_foreign_key "buyers_sellers", "sellers"
-  add_foreign_key "cars", "buyers"
   add_foreign_key "cars", "sellers"
-  add_foreign_key "comments", "buyers"
-  add_foreign_key "comments", "sellers"
   add_foreign_key "profiles", "users"
   add_foreign_key "reviews", "buyers"
   add_foreign_key "reviews", "sellers"
